@@ -9,7 +9,7 @@
 		var content = $(this),
 			wordCount,
 			value,
-			regex = /\s+/gi;;
+			regex = /\s+/gi;
 		
 		content.on('change keydown keypress keyup blur focus', function(e) {
 			
