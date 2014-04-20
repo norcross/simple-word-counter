@@ -8,13 +8,14 @@
 	
 		var content = $(this),
 			wordCount,
-			value;
+			value,
+			regex = /\s+/gi;;
 		
 		content.on('change keydown keypress keyup blur focus', function(e) {
 			
 			    value = $(content).val();
 			    
-			    wordCount = value.trim().replace(/(\r\n|\n|\r)/g, '').length;
+			    wordCount = value.trim().replace(regex, ' ').split(' ').length;
 
 			    if ( value.length === 0 ) {
 			         wordCount = 0;
