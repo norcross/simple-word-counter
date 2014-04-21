@@ -1,47 +1,37 @@
-function wordCounter() {
-    var value = jQuery( 'textarea#word-count' ).val();
+/*!
+* simplewordcounter js
+*
+*/
+(function($){
 
-    if (value.length === 0) {
-        jQuery( 'p.current-count span' ).html(0);
-        return;
-    }
+	$.fn.simplewordcounter = function() {
+	
+		var content = $(this),
+			wordCount,
+			value,
+			regex = /\s+/gi;
+		
+		content.on('change keydown keypress keyup blur focus', function(e) {
+			
+			    value = $(content).val();
+			    
+			    wordCount = value.trim().replace(regex, ' ').split(' ').length;
 
-    var regex = /\s+/gi;
-    var wordCount = value.trim().replace(regex, ' ').split(' ').length;
+			    if ( value.length === 0 ) {
+			         wordCount = 0;
+			    } 
+			   
+			    $( 'p.current-count span' ).html( wordCount );
+		
+		});
+	
+	}
+	
+})( jQuery );
 
-    jQuery( 'p.current-count span' ).html( wordCount );
-}
 
-jQuery( document ).ready(function($) {
-
-	// grab initial value on load
-	$( 'textarea#word-count' ).each(function() {
-		wordCounter();
-	});
-
-	// now handle various input methods
-	$( 'div.entry-container' ).on( 'change', 'textarea#word-count', function() {
-		wordCounter();
-	});
-
-	$( 'div.entry-container' ).on( 'keydown', 'textarea#word-count', function() {
-		wordCounter();
-	});
-
-	$( 'div.entry-container' ).on( 'keypress', 'textarea#word-count', function() {
-		wordCounter();
-	});
-
-	$( 'div.entry-container' ).on( 'keyup', 'textarea#word-count', function() {
-		wordCounter();
-	});
-
-	$( 'div.entry-container' ).on( 'blur', 'textarea#word-count', function() {
-		wordCounter();
-	});
-
-	$( 'div.entry-container' ).on( 'focus', 'textarea#word-count', function() {
-		wordCounter();
-	});
-
+$(document).ready(function() {
+	
+	$('textarea#word-count').simplewordcounter({});
+			
 });
